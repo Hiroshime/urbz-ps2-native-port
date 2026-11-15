@@ -1,0 +1,463 @@
+{
+  "utc": "2026-11-14T20:00:45.620864+00:00",
+  "passed": true,
+  "builds": {
+    "linux": {
+      "path": "build/native-urbz-pal/ps2run",
+      "sha256": "a21dbce88b567dfb0512ea383e81a774f7036f64655036efddd2d30ee3eeef17",
+      "bytes": 58338816,
+      "flags": "-ffp-contract=off -mavx2",
+      "netplay_source_id": "cc184d0b6fdb24564d6fec360ade1d9dfa1a44e0d53831baa8ce2dbd11012ab2"
+    },
+    "windows": {
+      "path": "build/wine-urbz-pal/ps2run.exe",
+      "sha256": "f1cb4090e470044e8ae02f37c5b97fea886f297f09ccdb4aff997afa2e8e00e6",
+      "bytes": 62545920,
+      "flags": "-mavx2 -ffp-contract=off",
+      "netplay_source_id": "cc184d0b6fdb24564d6fec360ade1d9dfa1a44e0d53831baa8ce2dbd11012ab2"
+    }
+  },
+  "graphics_default_profile": "padrao",
+  "preexisting_user_graphics_preferences_modified": false,
+  "launcher_smoke": {
+    "passed": true,
+    "checks": [
+      "missing preferences preserve default",
+      "atomic isolated profile selection",
+      "invalid profile preserves preferences",
+      "all five profiles resolve",
+      "CLI overrides environment and preserves native arguments",
+      "padrao preserves existing renderer environment"
+    ],
+    "real_user_preferences_modified": false,
+    "native_launcher_exit_code": 0,
+    "profile": "hd",
+    "snapshot_start_frame": 17990,
+    "last_frame": 18010,
+    "capture_internal_size": [
+      1280,
+      1022
+    ]
+  },
+  "resolution_benchmark": {
+    "utc": "2026-11-14T19:38:19.069820+00:00",
+    "executable_sha256": "e59991a8fa6c892208e5199602c09c64633f393d611b9d8288e142eccb56a216",
+    "snapshot_sha256": "a5955791d06ee805fa26613dbb7ae1b9cdf6b1dbed6416ed08a1cdab095c81ac",
+    "capture_frame": 18080,
+    "measured_frames": [
+      18101,
+      18300
+    ],
+    "scope": "Linux/Vulkan, one window at a time, 960x720 viewport, one simulation thread, uncapped, two-player first district. Not full-game or physical-PC certification.",
+    "captures": "Raw internal-resolution output before final presentation filters; no image enhancement applied.",
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER, 595.112.07, 12282 MiB",
+    "base_internal_size": [
+      640,
+      511
+    ],
+    "passed": true,
+    "results": [
+      {
+        "scale": 1,
+        "trials": [
+          {
+            "trial": 1,
+            "mean_ms": 33.247,
+            "p95_ms": 71.82,
+            "refreshes_per_second": 30.08,
+            "elapsed_seconds": 11.78,
+            "samples": 200,
+            "internal_size": [
+              640,
+              511
+            ],
+            "capture": "games/urbz-pal/validation/graphics/1x/trial-1/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 25.046,
+            "interpreted_vu_calls": 66024
+          },
+          {
+            "trial": 2,
+            "mean_ms": 45.824,
+            "p95_ms": 94.98,
+            "refreshes_per_second": 21.82,
+            "elapsed_seconds": 14.38,
+            "samples": 200,
+            "internal_size": [
+              640,
+              511
+            ],
+            "capture": "games/urbz-pal/validation/graphics/1x/trial-2/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 25.123,
+            "interpreted_vu_calls": 66024
+          }
+        ],
+        "mean_ms": 39.535,
+        "refreshes_per_second": 25.29
+      },
+      {
+        "scale": 2,
+        "trials": [
+          {
+            "trial": 1,
+            "mean_ms": 48.723,
+            "p95_ms": 101.39,
+            "refreshes_per_second": 20.52,
+            "elapsed_seconds": 15.98,
+            "samples": 200,
+            "internal_size": [
+              1280,
+              1022
+            ],
+            "capture": "games/urbz-pal/validation/graphics/2x/trial-1/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 26.982,
+            "interpreted_vu_calls": 66024
+          },
+          {
+            "trial": 2,
+            "mean_ms": 48.944,
+            "p95_ms": 103.11,
+            "refreshes_per_second": 20.43,
+            "elapsed_seconds": 15.38,
+            "samples": 200,
+            "internal_size": [
+              1280,
+              1022
+            ],
+            "capture": "games/urbz-pal/validation/graphics/2x/trial-2/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 26.84,
+            "interpreted_vu_calls": 66024
+          }
+        ],
+        "mean_ms": 48.834,
+        "refreshes_per_second": 20.48
+      },
+      {
+        "scale": 3,
+        "trials": [
+          {
+            "trial": 1,
+            "mean_ms": 51.67,
+            "p95_ms": 108.01,
+            "refreshes_per_second": 19.35,
+            "elapsed_seconds": 17.28,
+            "samples": 200,
+            "internal_size": [
+              1920,
+              1533
+            ],
+            "capture": "games/urbz-pal/validation/graphics/3x/trial-1/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 29.458,
+            "interpreted_vu_calls": 66024
+          },
+          {
+            "trial": 2,
+            "mean_ms": 53.264,
+            "p95_ms": 114.55,
+            "refreshes_per_second": 18.77,
+            "elapsed_seconds": 16.99,
+            "samples": 200,
+            "internal_size": [
+              1920,
+              1533
+            ],
+            "capture": "games/urbz-pal/validation/graphics/3x/trial-2/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 29.576,
+            "interpreted_vu_calls": 66024
+          }
+        ],
+        "mean_ms": 52.467,
+        "refreshes_per_second": 19.06
+      },
+      {
+        "scale": 4,
+        "trials": [
+          {
+            "trial": 1,
+            "mean_ms": 45.304,
+            "p95_ms": 96.99,
+            "refreshes_per_second": 22.07,
+            "elapsed_seconds": 16.54,
+            "samples": 200,
+            "internal_size": [
+              2560,
+              2044
+            ],
+            "capture": "games/urbz-pal/validation/graphics/4x/trial-1/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 30.864,
+            "interpreted_vu_calls": 66024
+          },
+          {
+            "trial": 2,
+            "mean_ms": 44.855,
+            "p95_ms": 96.15,
+            "refreshes_per_second": 22.29,
+            "elapsed_seconds": 15.69,
+            "samples": 200,
+            "internal_size": [
+              2560,
+              2044
+            ],
+            "capture": "games/urbz-pal/validation/graphics/4x/trial-2/shots/frame_18080.ppm",
+            "new_pictures_total": 155,
+            "refreshes_total": 310,
+            "mean_cpu_ms": 30.842,
+            "interpreted_vu_calls": 66024
+          }
+        ],
+        "mean_ms": 45.079,
+        "refreshes_per_second": 22.18
+      }
+    ],
+    "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor           : 16 logical processors"
+  },
+  "netplay_linux": {
+    "passed": true,
+    "tests": [
+      {
+        "pair": "1:1",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "2:2",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "3:3",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "4:4",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "1:2",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": false,
+        "incompatible_settings_rejected": true
+      },
+      {
+        "pair": "2:2:filter",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": true
+      },
+      {
+        "pair": "2:2:look",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      }
+    ],
+    "scope": "Short loopback sessions in the first district; not full-game graphics determinism certification."
+  },
+  "netplay_linux_windows_wine": {
+    "passed": true,
+    "tests": [
+      {
+        "pair": "1:1",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "2:2",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "3:3",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "4:4",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      },
+      {
+        "pair": "1:2",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": true
+      },
+      {
+        "pair": "2:2:filter",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": true
+      },
+      {
+        "pair": "2:2:look",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false
+      }
+    ],
+    "scope": "Short loopback sessions in the first district; not full-game graphics determinism certification."
+  },
+  "shared_card_regression_tls": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "write-and-share",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "restart-with-stale-client",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "backup-failure-preserves-client",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "different-final-card-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      }
+    ],
+    "scope": "Loopback shared-card bootstrap, explicit IOP test-hook write, restart and failure safety. No full-game save certification."
+  },
+  "compatibility_guard": "Internal scale and 2D filtering must match; presentation look may differ. Reject before card transfer/simulation.",
+  "scope": "Two-player first-district snapshot, loopback TLS, Windows executable under Wine. No full-game certification, real Windows launchers or second physical PC. Benchmark measured previous executable; only subsequent change to runner was network graphics identity check.",
+  "windows_package": {
+    "path": "dist/Urbz-PS2-Windows",
+    "executable_sha256": "f1cb4090e470044e8ae02f37c5b97fea886f297f09ccdb4aff997afa2e8e00e6",
+    "graphics_launchers_and_presets_copied": true,
+    "powershell_encoding": "UTF-8 BOM",
+    "interactive_comparison_links_checked": true,
+    "native_windows_launchers_tested": false
+  }
+}

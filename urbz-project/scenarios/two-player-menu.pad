@@ -1,0 +1,5 @@
+# Connect both controllers at the menu, select 2 Player on controller 1.
+4100 plug 0
+4100 plug 1
+4300 button 0 dpdown 3
+4400 button 0 a 3

@@ -1,0 +1,4 @@
+# Both pads connected; accept New Game from the two-player menu scenario.
+4900 plug 0
+4900 plug 1
+5050 button 0 a 3

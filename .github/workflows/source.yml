@@ -1,0 +1,22 @@
+name: Urbz source checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publication audit
+        run: python3 scripts/prepare_urbz_github.py --check
+      - name: Python syntax
+        run: python3 -m compileall -q urbz-project scripts/prepare_urbz_github.py
+      - name: Bash syntax
+        run: bash -n ./*.sh scripts/urbz*.sh scripts/fetch_urbz_tls.sh

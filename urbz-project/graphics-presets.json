@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "default": "padrao",
+  "presets": {
+    "padrao": {"label": "Padrão atual", "description": "Preserva a resolução e os filtros do ambiente/keys.ini.", "scale": null, "look": null, "sharp_2d": null},
+    "original": {"label": "Original 1x", "description": "Resolução interna 1x, sem nitidez ou suavização adicionais na apresentação.", "scale": 1, "look": "crisp", "sharp_2d": 0},
+    "hd": {"label": "HD 2x", "description": "Resolução interna 2x, nitidez e suavização de contornos.", "scale": 2, "look": "sharp_edges", "sharp_2d": 1},
+    "alto": {"label": "Alto 3x", "description": "Resolução interna 3x, nitidez e suavização de contornos.", "scale": 3, "look": "sharp_edges", "sharp_2d": 1},
+    "ultra": {"label": "Ultra 4x", "description": "Resolução interna 4x, maior custo de GPU e memória gráfica.", "scale": 4, "look": "sharp_edges", "sharp_2d": 1}
+  }
+}

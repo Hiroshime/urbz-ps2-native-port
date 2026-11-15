@@ -1,0 +1,383 @@
+{
+  "utc": "2026-11-14T15:47:41.160836+00:00",
+  "passed": true,
+  "builds": {
+    "linux": {
+      "path": "build/native-urbz-pal/ps2run",
+      "sha256": "9a869c16344105a7bd2a0171dc81038d2c4a38ca50d37e2733c4990d40e60004",
+      "bytes": 58321392,
+      "flags": "-ffp-contract=off -mavx2",
+      "netplay_source_id": "74c42f4e90af6fd97275f1d13ae6ae440c353dbc1333fdfc3638c3ee6d38d93a"
+    },
+    "windows": {
+      "path": "build/wine-urbz-pal/ps2run.exe",
+      "sha256": "cb2296c35df92901a89d9bec7c641daf3e5478f26a231c640a49e34ec23d16d0",
+      "bytes": 57884672,
+      "flags": "-mavx2 -ffp-contract=off",
+      "netplay_source_id": "74c42f4e90af6fd97275f1d13ae6ae440c353dbc1333fdfc3638c3ee6d38d93a"
+    }
+  },
+  "protocol": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "sha256-vectors-and-file-stream",
+        "passed": true
+      },
+      {
+        "name": "controller-routing-delay-0",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "controller-routing-delay-3",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "controller-routing-delay-12",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "large-socket-descriptor-rejected",
+        "passed": true
+      },
+      {
+        "name": "delayed-fragmented-tcp",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "wrong-game-rejected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "wrong-delay-rejected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-transferred",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "shared-card-mode-mismatch",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-install-failure",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-final-mismatch",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "desync-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "disconnect-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          7
+        ]
+      },
+      {
+        "name": "oversized-message-rejected",
+        "passed": true,
+        "exit_code": 1
+      },
+      {
+        "name": "silent-peer-timeout",
+        "passed": true,
+        "exit_code": 1
+      }
+    ]
+  },
+  "game": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "boot",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 1200,
+        "matching_state_checks": 40,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": false,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 0,
+        "input_delay_frames": 3,
+        "elapsed_seconds": 15.94
+      },
+      {
+        "name": "gameplay",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 510,
+        "matching_state_checks": 17,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": false,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 0,
+        "input_delay_frames": 3,
+        "elapsed_seconds": 33.11
+      },
+      {
+        "name": "latency",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 130,
+        "matching_state_checks": 5,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": false,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 10,
+        "input_delay_frames": 3,
+        "elapsed_seconds": 34.28
+      },
+      {
+        "name": "wan",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 210,
+        "matching_state_checks": 7,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": true,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 50,
+        "input_delay_frames": 6,
+        "elapsed_seconds": 38.57
+      },
+      {
+        "name": "cross",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 510,
+        "matching_state_checks": 17,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": true,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 0,
+        "input_delay_frames": 3,
+        "elapsed_seconds": 33.71
+      },
+      {
+        "name": "windowed",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 310,
+        "matching_state_checks": 11,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": true,
+        "windowed": true,
+        "proxy_delay_ms_each_way": 0,
+        "input_delay_frames": 3,
+        "elapsed_seconds": 29.25
+      }
+    ],
+    "scope": "Loopback LAN tests; no second physical PC or Internet session tested."
+  },
+  "shared_cards": {
+    "linux": {
+      "passed": true,
+      "tests": [
+        {
+          "name": "write-and-share",
+          "passed": true,
+          "exit_codes": [
+            0,
+            0
+          ],
+          "windows_via_wine": false
+        },
+        {
+          "name": "restart-with-stale-client",
+          "passed": true,
+          "exit_codes": [
+            0,
+            0
+          ],
+          "windows_via_wine": false
+        },
+        {
+          "name": "backup-failure-preserves-client",
+          "passed": true,
+          "exit_codes": [
+            1,
+            1
+          ],
+          "windows_via_wine": false
+        },
+        {
+          "name": "different-final-card-detected",
+          "passed": true,
+          "exit_codes": [
+            1,
+            1
+          ],
+          "windows_via_wine": false
+        }
+      ],
+      "scope": "Loopback shared-card bootstrap, explicit IOP test-hook write, restart and failure safety. No full-game save certification."
+    },
+    "windows": {
+      "passed": true,
+      "tests": [
+        {
+          "name": "write-and-share",
+          "passed": true,
+          "exit_codes": [
+            0,
+            0
+          ],
+          "windows_via_wine": true
+        },
+        {
+          "name": "restart-with-stale-client",
+          "passed": true,
+          "exit_codes": [
+            0,
+            0
+          ],
+          "windows_via_wine": true
+        },
+        {
+          "name": "backup-failure-preserves-client",
+          "passed": true,
+          "exit_codes": [
+            1,
+            1
+          ],
+          "windows_via_wine": true
+        },
+        {
+          "name": "different-final-card-detected",
+          "passed": true,
+          "exit_codes": [
+            1,
+            1
+          ],
+          "windows_via_wine": true
+        }
+      ],
+      "scope": "Loopback shared-card bootstrap, explicit IOP test-hook write, restart and failure safety. No full-game save certification."
+    }
+  },
+  "manual_game_save": {
+    "saved_via_game_menu": true,
+    "card_ecc_and_filesystem_checked": true,
+    "two_urbs_loaded_and_city_reached": true,
+    "loading_performance": "Very slow in this test; initially suspected hang, subsequently completed.",
+    "unformatted_card_formatting": "Exploratory trial interrupted before completion; launchers create preformatted empty cards.",
+    "overwrite_confirmation": "Select Yes explicitly; No is the default. Corrected network confirmation test wrote identical cards."
+  },
+  "internet": {
+    "provided": "Tailscale wrappers and setup instructions",
+    "authenticated_here": false,
+    "tested_between_houses": false
+  },
+  "scope": "Loopback, Windows executable via Wine, host-card transfer, actual native game Save/Load on Linux, 17000-frame cross-platform cold boot/load, and separate 1300-frame cross-platform overwrite confirmation. No Windows-native, physical-PC, real-Internet or full-campaign certification.",
+  "actual_game_save_over_network": {
+    "passed": true,
+    "windows_via_wine": true,
+    "initial_card_sha256": "b723ffcb4cd13d4597bcb60d5c69c23c1125a4ea125b343cc74cae4e85bce186",
+    "confirmation_checkpoint": true,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "frames": 1300,
+    "matching_state_checks": 43,
+    "game_page_writes": [
+      6180,
+      6180
+    ],
+    "final_card_sha256": "1a88537f8312349db5171e3432a6d35c5ba2bfb08e8046f48bb26b8ac1a0f321",
+    "recordings_equal": true,
+    "elapsed_seconds": 58.4
+  },
+  "actual_cold_boot_load_over_network": {
+    "passed": true,
+    "frames": 17000,
+    "matching_state_checks": 566,
+    "recordings_equal": true,
+    "windows_via_wine": true,
+    "scope": "Host card transferred, game loaded, two characters returned to city. That original script chose No at overwrite and performed no new save; the corrected confirmation is tested separately.",
+    "original_script_report": "games/urbz-pal/validation/saved-game-netplay/cross/report.json"
+  },
+  "linux_launchers": {
+    "passed": true,
+    "frames": 120,
+    "state_checks": 4,
+    "shared_card": true,
+    "automatic_rtc": true,
+    "formatted_new_cards": true
+  }
+}

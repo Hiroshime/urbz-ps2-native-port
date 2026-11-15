@@ -1,0 +1,328 @@
+{
+  "utc": "2026-11-14T19:05:45.710725+00:00",
+  "passed": true,
+  "builds": {
+    "linux": {
+      "path": "build/native-urbz-pal/ps2run",
+      "sha256": "e59991a8fa6c892208e5199602c09c64633f393d611b9d8288e142eccb56a216",
+      "bytes": 58334720,
+      "flags": "-ffp-contract=off -mavx2",
+      "netplay_source_id": "9c5644ac7baed2312c47288a826a0087e539e9063a67460c0d7680329ad40b4a"
+    },
+    "windows": {
+      "path": "build/wine-urbz-pal/ps2run.exe",
+      "sha256": "5fda68859be83d27827c8852044215d670f45d5434750cc7421049c14f9dc645",
+      "bytes": 62544896,
+      "flags": "-mavx2 -ffp-contract=off",
+      "netplay_source_id": "9c5644ac7baed2312c47288a826a0087e539e9063a67460c0d7680329ad40b4a"
+    }
+  },
+  "protocol": 3,
+  "tls": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "encrypted-controller-routing",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "encrypted-card-transfer",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "encrypted-fragmented-stream",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "wrong-key-no-card-transfer",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "tampered-record-no-card-transfer",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "encrypted-desync-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "encrypted-disconnect-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          7
+        ]
+      },
+      {
+        "name": "friend-can-join-after-rejected-peer",
+        "passed": true
+      }
+    ],
+    "scope": "Real TLS over loopback; no Internet/router traversal certified."
+  },
+  "plaintext_protocol_regression": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "sha256-vectors-and-file-stream",
+        "passed": true
+      },
+      {
+        "name": "controller-routing-delay-0",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "controller-routing-delay-3",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "controller-routing-delay-12",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "large-socket-descriptor-rejected",
+        "passed": true
+      },
+      {
+        "name": "delayed-fragmented-tcp",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "wrong-game-rejected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "wrong-delay-rejected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-transferred",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "shared-card-mode-mismatch",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-install-failure",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shared-card-final-mismatch",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "desync-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "disconnect-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          7
+        ]
+      },
+      {
+        "name": "oversized-message-rejected",
+        "passed": true,
+        "exit_code": 1
+      },
+      {
+        "name": "silent-peer-timeout",
+        "passed": true,
+        "exit_code": 1
+      }
+    ]
+  },
+  "encrypted_game_cross": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "cross",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 510,
+        "matching_state_checks": 17,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": true,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 0,
+        "input_delay_frames": 3,
+        "authenticated_tls": true,
+        "elapsed_seconds": 36.22
+      }
+    ],
+    "scope": "Loopback LAN tests; no second physical PC or Internet session tested."
+  },
+  "encrypted_wan_simulation": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "wan",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "frames": 210,
+        "matching_state_checks": 7,
+        "input_and_checkpoint_records_equal": true,
+        "both_peer_inputs_observed": true,
+        "windows_via_wine": true,
+        "windowed": false,
+        "proxy_delay_ms_each_way": 50,
+        "input_delay_frames": 6,
+        "authenticated_tls": true,
+        "elapsed_seconds": 38.43
+      }
+    ],
+    "scope": "Loopback LAN tests; no second physical PC or Internet session tested."
+  },
+  "encrypted_cards": {
+    "passed": true,
+    "tests": [
+      {
+        "name": "write-and-share",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "restart-with-stale-client",
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "backup-failure-preserves-client",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      },
+      {
+        "name": "different-final-card-detected",
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "windows_via_wine": true,
+        "authenticated_tls": true
+      }
+    ],
+    "scope": "Loopback shared-card bootstrap, explicit IOP test-hook write, restart and failure safety. No full-game save certification."
+  },
+  "encrypted_game_save": {
+    "passed": true,
+    "windows_via_wine": true,
+    "initial_card_sha256": "b723ffcb4cd13d4597bcb60d5c69c23c1125a4ea125b343cc74cae4e85bce186",
+    "confirmation_checkpoint": true,
+    "authenticated_tls": true,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "frames": 1300,
+    "matching_state_checks": 43,
+    "game_page_writes": [
+      6180,
+      6180
+    ],
+    "final_card_sha256": "1a88537f8312349db5171e3432a6d35c5ba2bfb08e8046f48bb26b8ac1a0f321",
+    "recordings_equal": true,
+    "elapsed_seconds": 60.11
+  },
+  "router": {
+    "configured_by_agent": false,
+    "upnp_igd_found": false,
+    "wan_ipv4_known": false,
+    "host_firewall_already_allows_default_port": true,
+    "external_connection_verified": false
+  },
+  "scope": "TLS over real loopback sockets; Windows executable under Wine. Actual public-IP reachability, router forwarding, CGNAT status, physical PCs and native Windows remain unverified."
+}

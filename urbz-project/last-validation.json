@@ -1,0 +1,63 @@
+{
+  "utc": "2026-11-14T18:55:45.042302+00:00",
+  "game": "SLES-52908",
+  "boot_sha256": "8a747e1b0946e60bfb178c7cb6f58eaa5bcf6c5259b2d28359d2dc96e11e3956",
+  "linux_executable_sha256": "26f2d98ee1df3e1d781b8d79d256325c1a870f22f3bf62aae1a8dbd1a0ccaa1b",
+  "tests": [
+    {
+      "name": "two-controller-runtime",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/two-controller-runtime.log"
+    },
+    {
+      "name": "save-files",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/save-files.log"
+    },
+    {
+      "name": "record-two-players",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/record-two-players.log"
+    },
+    {
+      "name": "linux-replay",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/linux-replay.log",
+      "matching_checkpoints": 333
+    },
+    {
+      "name": "detect-changed-input",
+      "passed": true,
+      "exit_code": 3,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/detect-changed-input.log"
+    },
+    {
+      "name": "linux-gameplay-replay",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/linux-gameplay-replay.log",
+      "matching_checkpoints": 34
+    },
+    {
+      "name": "windows-replay-via-wine",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/windows-replay-via-wine.log",
+      "matching_checkpoints": 333
+    },
+    {
+      "name": "windows-gameplay-replay-via-wine",
+      "passed": true,
+      "exit_code": 0,
+      "log": "games/urbz-pal/validation/multiplayer-baseline/windows-gameplay-replay-via-wine.log",
+      "matching_checkpoints": 34
+    }
+  ],
+  "scope": "Local controls and recorded EE checkpoints; no network session or full-game certification.",
+  "windows_executable_sha256": "32dc5f98fd6066b3e3948ceaa78230c04646187935c221bd9c7733e52ec2280d",
+  "passed": true
+}
