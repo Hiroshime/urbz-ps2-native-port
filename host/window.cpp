@@ -1444,8 +1444,8 @@ bool no_limit() {
 // that takes its sound in large blocks (wireless headsets over WASAPI) then makes the frames uneven: seven of 20 ms, one of 30 ms, one
 // of 3 ms, about six times a second (measured with Urban Reign and a Corsair HS80), which shows as judder in every camera pan even
 // at a steady 50 fps. By default the clock paces the game instead, one frame every 1/50 or 1/60 s, and the sound only steers that
-// clock: frames up to 1% longer while more sound than kSteerMs is waiting, up to 1% shorter while less. The sound stretcher still
-// covers a game that runs slow.
+// clock: frames up to 1% longer while more sound than kSteerMs is waiting. A low audio queue must not accelerate the game beyond
+// its nominal rate; the sound stretcher covers a game that runs slow.
 bool audio_paced() {
     static const bool on = ps2::os::env("PS2_PACE") == "audio";
     return on;
@@ -1473,7 +1473,12 @@ void pace() {
         g_pipe->frame(audio_seconds());
         const double started = audio_seconds();
         const double frequency = static_cast<double>(SDL_GetPerformanceFrequency());
-        const double steer = std::clamp((g_pipe->queued_ms() - kSteerMs) / kSteerMs * 0.02, -0.01, 0.01);
+        static const bool reported = [] {
+            std::fprintf(stderr, "[pace] clock target %u Hz; audio correction can slow execution only\n", ps2::g_options.pal ? 50u : 60u);
+            return true;
+        }();
+        (void)reported;
+        const double steer = std::clamp((g_pipe->queued_ms() - kSteerMs) / kSteerMs * 0.02, 0.0, 0.01);
         const auto period = static_cast<std::uint64_t>(frequency / (ps2::g_options.pal ? 50.0 : 60.0) * (1.0 + steer));
         const std::uint64_t now = SDL_GetPerformanceCounter();
         // more than two frames behind (a load, a hold): start counting again from now rather than rushing to catch up

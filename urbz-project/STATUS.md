@@ -37,3 +37,5 @@ O modo com janela usa renderização paralela, CPU/VU na mesma thread de simula�
 Relatórios
 
 `build-manifest.json` identifica os executáveis atuais. `last-fsr-wide-validation.json` registra a integração gráfica recente; os demais arquivos `last-*-validation.json` e documentos de desempenho conservam os resultados e hashes de suas respectivas etapas. ISO, snapshots, capturas e logs brutos permanecem nas pastas locais ignoradas. O workflow GitHub verifica fontes, auditoria e sintaxe; não executa o jogo sem a ISO e fixtures privadas.
+
+A correção posterior do relógio impede que uma fila curta de áudio acelere a execução normal acima da taxa nominal. O teste controlado comparou os mesmos comandos e checkpoints entre o build anterior e os dois builds corrigidos; os resultados estão em last-pacing-validation.json. A medição anterior de 50,13 Hz permanece no relatório FSR como histórico, não como alvo de velocidade.

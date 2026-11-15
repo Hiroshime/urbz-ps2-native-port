@@ -1,0 +1,79 @@
+{
+  "utc": "2026-11-15T16:09:03.140569+00:00",
+  "passed": true,
+  "tests": [
+    {
+      "name": "baseline",
+      "windows_via_wine": false,
+      "executable_sha256": "507c579341c8e3036ee8467aacfff6bb6e87727963c174fd43ffcae3ba77b020",
+      "measured_refreshes": 800,
+      "mean_ms": 19.95157,
+      "refreshes_per_second": 50.12136,
+      "new_pictures": 500,
+      "total_refreshes": 1000,
+      "directory": "games/urbz-pal/validation/pacing/baseline",
+      "gameplay_checkpoints_equal_to_baseline": true
+    },
+    {
+      "name": "linux",
+      "windows_via_wine": false,
+      "executable_sha256": "5a4954a46072d8d749f0f298459c3b51802968fd4ce3c33a829cf4996258656b",
+      "measured_refreshes": 800,
+      "mean_ms": 20.00381,
+      "refreshes_per_second": 49.99047,
+      "new_pictures": 500,
+      "total_refreshes": 1000,
+      "directory": "games/urbz-pal/validation/pacing/linux",
+      "gameplay_checkpoints_equal_to_baseline": true
+    },
+    {
+      "name": "windows",
+      "windows_via_wine": true,
+      "executable_sha256": "5c3bc3631fba5c5d4bbe32a972ecad323135b29fa4cfc18f54e165671b0ea16b",
+      "measured_refreshes": 800,
+      "mean_ms": 20.01462,
+      "refreshes_per_second": 49.96346,
+      "new_pictures": 500,
+      "total_refreshes": 1000,
+      "directory": "games/urbz-pal/validation/pacing/windows",
+      "gameplay_checkpoints_equal_to_baseline": true
+    }
+  ],
+  "scope": "One private two-player PAL district, sequential real window runs, parallel renderer, FSR1/QHD/16:9, dummy audio, 1000 refreshes with 200 warm-up excluded. Not a physical-console movement comparison or full-game certification.",
+  "builds": {
+    "linux": {
+      "path": "build/native-urbz-pal/ps2run",
+      "sha256": "5a4954a46072d8d749f0f298459c3b51802968fd4ce3c33a829cf4996258656b",
+      "bytes": 58501672,
+      "flags": "-ffp-contract=off -mavx2",
+      "netplay_source_id": "51eb2e10c8a5d54cfd798fc097647a89ae39e11f82052da18a711a487805ff7b"
+    },
+    "windows": {
+      "path": "build/wine-urbz-pal/ps2run.exe",
+      "sha256": "5c3bc3631fba5c5d4bbe32a972ecad323135b29fa4cfc18f54e165671b0ea16b",
+      "bytes": 62707712,
+      "flags": "-mavx2 -ffp-contract=off",
+      "netplay_source_id": "51eb2e10c8a5d54cfd798fc097647a89ae39e11f82052da18a711a487805ff7b"
+    }
+  },
+  "tls_cross_build_regression": {
+    "passed": true,
+    "tests": [
+      {
+        "pair": "2:2:fsr",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false,
+        "power_on": false
+      }
+    ],
+    "scope": "First-district snapshot loopback sessions; not full-game graphics determinism certification."
+  },
+  "root_cause_scope": "Audio queue steering previously allowed periods up to 1% shorter than nominal. Corrected default clock pacing permits slowing only. This removes a measured overshoot, without proving it caused the complete subjective movement report."
+}

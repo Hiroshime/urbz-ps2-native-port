@@ -160,7 +160,7 @@ Aumentar a resolução define o tamanho interno da renderização; 2× não sign
 
 Para experimentar FSR1 em Quad HD e widescreen: `./Jogar-Linux.sh --graficos qhd --wide --fullscreen`. Sem `--wide`, a imagem conserva 4:3. No pacote Windows: `Jogar-Windows.cmd -Graphics qhd -Widescreen -Fullscreen`. O filtro é opcional e não gera quadros nem texturas novas. Consulte [FSR.md](urbz-project/FSR.md) e [WIDE-QHD.md](urbz-project/WIDE-QHD.md) para os controles de saída e proporção.
 
-O launcher Linux com FSR1, widescreen e saída QHD mediu **50,13 atualizações/s** na cena em 2×, com 255 imagens novas em 510 atualizações: aproximadamente a fluidez original PAL de 25 imagens/s. Um benchmark sequencial separado mediu ganho de 3,61× em 2× contra o executável anterior. Isso não certifica desempenho em todas as áreas ou GPUs. 4× ficou abaixo da capacidade necessária nesse benchmark.
+O launcher Linux com FSR1, widescreen e saída QHD preserva aproximadamente **50 atualizações/s e 25 imagens novas/s** na cena testada em 2×. A correção do limite de velocidade removeu a aceleração automática de até 1% usada para acompanhar o áudio; a comparação local mediu 50,12 Hz antes e 49,99 Hz depois, com os mesmos checkpoints de gameplay. Um benchmark sequencial separado mediu ganho de 3,61× em 2× contra o executável anterior. Isso não certifica desempenho em todas as áreas ou GPUs. 4× ficou abaixo da capacidade necessária nesse benchmark.
 
 O alvo atual é **preservar a fluidez original**, não forçar 60 FPS. Os experimentos de desbloqueio ficaram separados dos launchers. Detalhes em [GRAFICOS.md](urbz-project/GRAFICOS.md) e [DESEMPENHO.md](urbz-project/DESEMPENHO.md). Capturas e gráficos locais mencionados nesses documentos não acompanham o checkout público.
 
@@ -191,6 +191,7 @@ python3 scripts/prepare_urbz_github.py --check
 - [Manifesto dos builds locais](urbz-project/build-manifest.json)
 - [Última validação de desempenho](urbz-project/last-performance-validation.json)
 - [Validação FSR, QHD e widescreen](urbz-project/last-fsr-wide-validation.json)
+- [Validação do limite de velocidade](urbz-project/last-pacing-validation.json)
 
 O workflow de fontes verifica publicação, sintaxe Python e Bash sem a ISO. O workflow de compilação herdado permanece manual e exige as dependências adequadas; não foi executado no GitHub para este fork.
 
