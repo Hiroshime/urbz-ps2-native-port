@@ -1896,11 +1896,17 @@ bool open_window(bool fullscreen) {
 #endif
     g_game_title = ps2::os::env("PS2_WINDOW_TITLE");
     const std::string initial_title = g_game_title.empty() ? g_speed_title : g_game_title + "   |   " + g_speed_title;
-    g_window = SDL_CreateWindow(initial_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ps2::g_options.widescreen ? 1280 : 960, 720, flags);
+    const int width = ps2::g_options.window_width ? static_cast<int>(ps2::g_options.window_width) : (ps2::g_options.widescreen ? 1280 : 960);
+    const int height = ps2::g_options.window_height ? static_cast<int>(ps2::g_options.window_height) : 720;
+    g_window = SDL_CreateWindow(initial_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
     if (!g_window) {
         std::fprintf(stderr, "SDL: %s\n", SDL_GetError());
         return false;
     }
+    int drawable_width = 0, drawable_height = 0;
+    SDL_GetWindowSizeInPixels(g_window, &drawable_width, &drawable_height);
+    std::fprintf(stderr, "[window] requested %dx%d, drawable %dx%d, aspect %s\n", width, height,
+                 drawable_width, drawable_height, ps2::g_options.widescreen ? "16:9" : "4:3");
     SDL_ShowWindow(g_window);
     SDL_RaiseWindow(g_window);
 #ifdef _WIN32
@@ -2067,6 +2073,8 @@ int run_window(const std::function<int()> &emulate) {
     ps2::init_graphics();
     g_gpu_present = attach_gpu();
     std::fprintf(stderr, "[window] %s\n", g_gpu_present ? "presenting through WebGPU" : "presenting through SDL");
+    if (!g_gpu_present && ps2::os::env("PS2_UPSCALER") == "fsr1")
+        std::fprintf(stderr, "[video] FSR 1 is unavailable with SDL presentation; the existing picture filter will be used\n");
     if (!g_gpu_present && !create_renderer()) return 1;
     const bool threads = !std::getenv("PS2_ONE_THREAD") && !std::getenv("PS2_TIME") && ps2::g_options.frames_dir.empty();
     if (!threads) {

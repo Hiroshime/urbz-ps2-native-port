@@ -7,4 +7,5 @@ if [ ! -x tools/wine-bench/linux-llvm-mingw/bin/x86_64-w64-mingw32-clang++ ]; th
   bash scripts/wine-bench.sh setup
 fi
 bash scripts/fetch_urbz_tls.sh
+python urbz-project/apply_game_features.py
 exec bash scripts/wine-bench.sh build urbz-pal

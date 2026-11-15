@@ -17,12 +17,14 @@ function Set-UrbzGraphics {
         } else { $Profile = $table.default }
     }
     $property = $table.presets.PSObject.Properties[$Profile]
-    if (-not $property) { throw 'Perfil gráfico inválido. Escolha padrao, original, hd, alto ou ultra.' }
+    if (-not $property) { throw 'Perfil gráfico inválido. Escolha padrao, original, hd, alto, ultra ou qhd.' }
     $preset = $property.Value
     if ($null -ne $preset.scale) {
         $env:PS2_SCALE = [string]$preset.scale
         $env:PS2_LOOK = [string]$preset.look
         $env:PS2_SHARP_2D = [string]$preset.sharp_2d
+        if ($preset.upscaler) { $env:PS2_UPSCALER = [string]$preset.upscaler }
+        if ($preset.window_size) { $env:PS2_WINDOW_SIZE = [string]$preset.window_size }
         Write-Host "Gráficos: $($preset.label)."
     }
 }

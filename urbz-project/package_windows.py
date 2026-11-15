@@ -34,6 +34,8 @@ def main():
         (ROOT / "urbz-project/Configure-Graphics-Windows.ps1", "Configure-Graphics-Windows.ps1"),
         (ROOT / "urbz-project/Play-Windows.ps1", "Play-Windows.ps1"),
         (ROOT / "urbz-project/GRAFICOS.md", "GRAFICOS.md"),
+        (ROOT / "urbz-project/FSR.md", "FSR.md"),
+        (ROOT / "urbz-project/WIDE-QHD.md", "WIDE-QHD.md"),
         (ROOT / "urbz-project/GRAFICOS-RESULTADOS.md", "GRAFICOS-RESULTADOS.md"),
         (ROOT / "urbz-project/DESEMPENHO.md", "DESEMPENHO.md"),
         (ROOT / "urbz-project/FPS-INVESTIGACAO.md", "FPS-INVESTIGACAO.md"),
@@ -65,6 +67,8 @@ def main():
     # upstream toolchain is used here; trimming it is a later packaging task.
     shutil.copytree(ROOT / "tools/wine-bench/win-llvm-mingw", out / "compiler", dirs_exist_ok=True)
     shutil.copytree(ROOT / "urbz-project/licenses", out / "licenses", dirs_exist_ok=True)
+    shutil.copy2(ROOT / "third_party/fsr1/LICENSE", out / "licenses/FSR1-MIT.txt")
+    shutil.copy2(ROOT / "third_party/fsr1/UPSTREAM.md", out / "licenses/FSR1-UPSTREAM.md")
     target_iso = out / "disc.iso"
     if not target_iso.exists():
         subprocess.run(["cp", "--reflink=auto", "--", str(iso), str(target_iso)], check=True)
@@ -104,8 +108,8 @@ exit /b %URBZ_RESULT%
         "Saves e gravações ficam em user.\n\n"
         "Build Windows verificado via Wine/Vulkan. Ainda falta teste em Windows real.\n"
         "Este build requer CPU com AVX2.\n"
-        "Gráficos opcionais: abra Configurar-Graficos.cmd e escolha padrao, original, hd, alto ou ultra. Leia GRAFICOS.md.\n"
-        "Por execução: Jogar-Windows.cmd -Graphics hd. Os atalhos de rede também aceitam -Graphics.\n"
+        "Gráficos opcionais: abra Configurar-Graficos.cmd e escolha padrao, original, hd, alto, ultra ou qhd. Leia GRAFICOS.md.\n"
+        "Por execução: Jogar-Windows.cmd -Graphics qhd -Fullscreen. Os atalhos de rede também aceitam -Graphics.\n"
         "Em rede, use a mesma resolução interna e filtro 2D nos dois PCs; configurações incompatíveis são rejeitadas.\n"
         "LAN experimental: abra Hospedar-LAN.cmd em um PC e Entrar-LAN.cmd no outro.\n"
         "Leia LAN.md. Cada PC precisa da mesma revisão de build e da mesma ISO.\n"

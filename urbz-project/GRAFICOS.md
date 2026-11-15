@@ -9,8 +9,9 @@ Os atalhos agora oferecem os mesmos perfis no Linux e no Windows. Nenhum perfil 
 | `hd` | 2× | Nitidez e suavização de contornos |
 | `alto` | 3× | Nitidez e suavização de contornos |
 | `ultra` | 4× | Nitidez e suavização de contornos |
+| `qhd` | 2× | Saída 2560×1440 com FSR1 EASU/RCAS |
 
-2× multiplica cada dimensão da renderização por dois; não significa saída 1080p. Na cena medida, as capturas internas foram 640×511, 1280×1022, 1920×1533 e 2560×2044. A apresentação mantém a proporção original 4:3. Resoluções maiores melhoram os contornos 3D; as texturas e os elementos desenhados em bitmap continuam com o detalhe original.
+2× multiplica cada dimensão da renderização por dois; não significa saída 1080p. Na cena medida, as capturas internas foram 640×511, 1280×1022, 1920×1533 e 2560×2044. A apresentação padrão mantém a proporção original 4:3. O perfil `qhd` acrescenta [FSR1 e saída Quad HD](FSR.md). A correção opcional da câmera 16:9 está descrita em [WIDE-QHD.md](WIDE-QHD.md). Resoluções maiores melhoram os contornos 3D; as texturas e os elementos desenhados em bitmap continuam com o detalhe original.
 
 No Linux, abra `./Configurar-Graficos.sh` na raiz do projeto e escolha o perfil. Para selecionar diretamente: `./Configurar-Graficos.sh hd`. A escolha fica em `games/urbz-pal/user/graphics.json`. Para uma única execução:
 
@@ -28,7 +29,7 @@ A escolha explícita no comando tem prioridade sobre `URBZ_GRAFICOS`/`URBZ_GRAPH
 
 Na rede, os dois jogadores precisam usar a mesma resolução interna e o mesmo filtro 2D. Escolher o mesmo perfil explícito nos dois PCs atende a essa condição. O teste de 1× contra 2× encontrou divergência no estado do jogo; por isso, a conexão agora rejeita essas diferenças antes de iniciar a simulação ou transferir o cartão compartilhado. Uma mensagem sobre `simulation settings (including internal resolution and 2D filtering)` indica essa incompatibilidade. Atualize os executáveis dos dois PCs juntos.
 
-O filtro da imagem final (`PS2_LOOK`, alterável com F2) pode variar por jogador. Ele não altera a resolução interna. O filtro 2D (`PS2_SHARP_2D`) participa da renderização e precisa coincidir quando a escala é maior que 1×. O menu F1 continua desativado em rede.
+O filtro da imagem final (`PS2_LOOK`, alterável com F2), o FSR1 e o tamanho da saída podem variar por jogador. A proporção widescreen precisa coincidir. Ele não altera a resolução interna. O filtro 2D (`PS2_SHARP_2D`) participa da renderização e precisa coincidir quando a escala é maior que 1×. O menu F1 continua desativado em rede.
 
 Comparação e desempenho medidos:
 
@@ -38,4 +39,4 @@ Comparação e desempenho medidos:
 
 Para repetir, execute `./Comparar-Graficos.sh` na raiz. Ele usa o snapshot local da primeira área, gera capturas reais e mede cada escala em duas execuções sequenciais. A exportação usa Pillow e Matplotlib no Python do sistema; `URBZ_REPORT_PYTHON` permite indicar outro interpretador com essas dependências. O snapshot e a ISO não acompanham o código-fonte.
 
-Estes perfis usam os recursos existentes do renderer: escala interna, filtro 2D e filtros de apresentação. FSR, geração de quadros, texturas HD e correção widescreen ainda não foram implementados nesta etapa. Aumentar a resolução não garante velocidade integral. Depois da comparação gráfica inicial, o runtime foi [otimizado](DESEMPENHO.md): 1× e 2× passaram a superar a capacidade necessária para a velocidade PAL na cena medida, enquanto 4× permaneceu abaixo. Isso preserva o limite original de aproximadamente 25 imagens novas/s; não equivale a desbloquear 60 FPS.
+Estes perfis usam os recursos existentes do renderer: escala interna, filtro 2D e filtros de apresentação. FSR1 e saída Quad HD foram acrescentados como opções; consulte [FSR.md](FSR.md) para uso, evidências e limites. Geração de quadros e texturas HD continuam ausentes. Aumentar a resolução não garante velocidade integral. Depois da comparação gráfica inicial, o runtime foi [otimizado](DESEMPENHO.md): 1× e 2× passaram a superar a capacidade necessária para a velocidade PAL na cena medida, enquanto 4× permaneceu abaixo. Isso preserva o limite original de aproximadamente 25 imagens novas/s; não equivale a desbloquear 60 FPS.

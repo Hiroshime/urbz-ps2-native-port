@@ -1,0 +1,497 @@
+{
+  "utc": "2026-11-15T13:31:32.933316+00:00",
+  "passed": true,
+  "builds": {
+    "linux": {
+      "path": "build/native-urbz-pal/ps2run",
+      "sha256": "507c579341c8e3036ee8467aacfff6bb6e87727963c174fd43ffcae3ba77b020",
+      "bytes": 58501552,
+      "flags": "-ffp-contract=off -mavx2",
+      "netplay_source_id": "2a1182686d80b68754681f2a9df4456b87393d0ff7d65f5d7856b803c115edab"
+    },
+    "windows": {
+      "path": "build/wine-urbz-pal/ps2run.exe",
+      "sha256": "5d3898efa9504c7a82a56221a6fea18426aa7a9c372828d311311895367474f5",
+      "bytes": 62707200,
+      "flags": "-mavx2 -ffp-contract=off",
+      "netplay_source_id": "2a1182686d80b68754681f2a9df4456b87393d0ff7d65f5d7856b803c115edab"
+    }
+  },
+  "presentation_tests": {
+    "linux": {
+      "executable_sha256": "507c579341c8e3036ee8467aacfff6bb6e87727963c174fd43ffcae3ba77b020",
+      "snapshot_sha256": "a5955791d06ee805fa26613dbb7ae1b9cdf6b1dbed6416ed08a1cdab095c81ac",
+      "utc": "2026-11-15T13:29:15.472607+00:00",
+      "windows_via_wine": false,
+      "widescreen": false,
+      "scope": "One two-player district, actual fullscreen 2560x1440 Vulkan presentation. Sequential uncapped performance; 400 refreshes after warm-up, no diagnostic capture in timing runs. Not campaign certification.",
+      "tests": [
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/linux/off/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "c645eadb633e5d55f206a5954b79941fc2b25c6bc3d9fd83ea83c4cab84d45b9",
+          "presented_sha256": "efeb629f5cd1adabffc69458e0b8ccbc0b67d71e6df40eedbff298c23412b2a6"
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/linux/fsr1/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "c645eadb633e5d55f206a5954b79941fc2b25c6bc3d9fd83ea83c4cab84d45b9",
+          "presented_sha256": "bd3dd5e9854abfa0c19340fa57c480d4f952408295b0e8e94e4e62af27105d1a"
+        },
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/linux/off/performance",
+          "passed": true,
+          "mean_ms": 14.652,
+          "p95_ms": 30.48,
+          "refreshes_per_second": 68.25,
+          "new_pictures_total": 255,
+          "refreshes_total": 510,
+          "interpreted_vu_calls": 0
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/linux/fsr1/performance",
+          "passed": true,
+          "mean_ms": 14.593,
+          "p95_ms": 30.18,
+          "refreshes_per_second": 68.53,
+          "new_pictures_total": 255,
+          "refreshes_total": 510,
+          "interpreted_vu_calls": 0
+        }
+      ],
+      "raw_images_equal": true,
+      "gameplay_checkpoints_equal": true,
+      "letterbox_preserved": true,
+      "changed_content_fraction": 0.748135,
+      "mean_absolute_channel_difference": 1.1847,
+      "passed": true
+    },
+    "windows": {
+      "executable_sha256": "5d3898efa9504c7a82a56221a6fea18426aa7a9c372828d311311895367474f5",
+      "snapshot_sha256": "a5955791d06ee805fa26613dbb7ae1b9cdf6b1dbed6416ed08a1cdab095c81ac",
+      "utc": "2026-11-15T13:29:38.658867+00:00",
+      "windows_via_wine": true,
+      "widescreen": false,
+      "scope": "One two-player district, actual fullscreen 2560x1440 Vulkan presentation. Sequential uncapped performance; 400 refreshes after warm-up, no diagnostic capture in timing runs. Not campaign certification.",
+      "tests": [
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/windows/off/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "c645eadb633e5d55f206a5954b79941fc2b25c6bc3d9fd83ea83c4cab84d45b9",
+          "presented_sha256": "efeb629f5cd1adabffc69458e0b8ccbc0b67d71e6df40eedbff298c23412b2a6"
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/windows/fsr1/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "c645eadb633e5d55f206a5954b79941fc2b25c6bc3d9fd83ea83c4cab84d45b9",
+          "presented_sha256": "bd3dd5e9854abfa0c19340fa57c480d4f952408295b0e8e94e4e62af27105d1a"
+        },
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/windows/off/performance",
+          "passed": true,
+          "mean_ms": 14.772,
+          "p95_ms": 31.15,
+          "refreshes_per_second": 67.7,
+          "new_pictures_total": 255,
+          "refreshes_total": 510,
+          "interpreted_vu_calls": 0
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/windows/fsr1/performance",
+          "passed": true,
+          "mean_ms": 14.764,
+          "p95_ms": 31.08,
+          "refreshes_per_second": 67.73,
+          "new_pictures_total": 255,
+          "refreshes_total": 510,
+          "interpreted_vu_calls": 0
+        }
+      ],
+      "raw_images_equal": true,
+      "gameplay_checkpoints_equal": true,
+      "letterbox_preserved": true,
+      "changed_content_fraction": 0.748135,
+      "mean_absolute_channel_difference": 1.1847,
+      "passed": true
+    },
+    "linux-wide": {
+      "utc": "2026-11-15T13:23:35.204235+00:00",
+      "windows_via_wine": false,
+      "widescreen": true,
+      "scope": "One two-player district, actual fullscreen 2560x1440 Vulkan presentation. Sequential uncapped performance; 400 refreshes after warm-up, no diagnostic capture in timing runs. Not campaign certification.",
+      "tests": [
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/linux-wide/off/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "5a67ad9ddca592761e20ad9581971580b5f8121bab84668fe1217d1cb25eb9b0",
+          "presented_sha256": "0a3d224cc00a68345867bfec61d114420c86f27b346f854a0a2130d3450e2f98"
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/linux-wide/fsr1/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "5a67ad9ddca592761e20ad9581971580b5f8121bab84668fe1217d1cb25eb9b0",
+          "presented_sha256": "22c9483f9ae27285f7865b3c8efacdf58ff0211b5ac2b07f232361f61a8fda3a"
+        }
+      ],
+      "raw_images_equal": true,
+      "gameplay_checkpoints_equal": true,
+      "letterbox_preserved": true,
+      "changed_content_fraction": 0.758538,
+      "mean_absolute_channel_difference": 1.2377,
+      "passed": true
+    },
+    "windows-wide": {
+      "utc": "2026-11-15T13:23:41.772537+00:00",
+      "windows_via_wine": true,
+      "widescreen": true,
+      "scope": "One two-player district, actual fullscreen 2560x1440 Vulkan presentation. Sequential uncapped performance; 400 refreshes after warm-up, no diagnostic capture in timing runs. Not campaign certification.",
+      "tests": [
+        {
+          "mode": "off",
+          "directory": "games/urbz-pal/validation/fsr/windows-wide/off/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "5a67ad9ddca592761e20ad9581971580b5f8121bab84668fe1217d1cb25eb9b0",
+          "presented_sha256": "0a3d224cc00a68345867bfec61d114420c86f27b346f854a0a2130d3450e2f98"
+        },
+        {
+          "mode": "fsr1",
+          "directory": "games/urbz-pal/validation/fsr/windows-wide/fsr1/capture",
+          "passed": true,
+          "output_size": [
+            2560,
+            1440
+          ],
+          "raw_capture_sha256": "5a67ad9ddca592761e20ad9581971580b5f8121bab84668fe1217d1cb25eb9b0",
+          "presented_sha256": "22c9483f9ae27285f7865b3c8efacdf58ff0211b5ac2b07f232361f61a8fda3a"
+        }
+      ],
+      "raw_images_equal": true,
+      "gameplay_checkpoints_equal": true,
+      "letterbox_preserved": true,
+      "changed_content_fraction": 0.758538,
+      "mean_absolute_channel_difference": 1.2377,
+      "passed": true
+    }
+  },
+  "cross_build_captures_equal": true,
+  "widescreen_geometry": {
+    "geometry_landmark_ratios_wide_over_original": [
+      0.9777534246575342,
+      0.9673285198555956
+    ],
+    "within_15_percent_of_original_shape": true,
+    "landmarks": [
+      [
+        {
+          "source_bbox": [
+            186,
+            215,
+            215,
+            249
+          ],
+          "detected_pixels": 361,
+          "display_width_at_native_height": 31.938,
+          "display_height": 35,
+          "display_width_height_ratio": 0.9125
+        },
+        {
+          "source_bbox": [
+            352,
+            175,
+            402,
+            223
+          ],
+          "detected_pixels": 883,
+          "display_width_at_native_height": 54.294,
+          "display_height": 49,
+          "display_width_height_ratio": 1.108
+        }
+      ],
+      [
+        {
+          "source_bbox": [
+            180,
+            215,
+            201,
+            249
+          ],
+          "detected_pixels": 267,
+          "display_width_at_native_height": 31.228,
+          "display_height": 35,
+          "display_width_height_ratio": 0.8922
+        },
+        {
+          "source_bbox": [
+            385,
+            175,
+            421,
+            223
+          ],
+          "detected_pixels": 655,
+          "display_width_at_native_height": 52.519,
+          "display_height": 49,
+          "display_width_height_ratio": 1.0718
+        }
+      ]
+    ],
+    "hud_clock_ratios_wide_over_original": [
+      1.0,
+      1.0
+    ],
+    "hud_clock_landmarks": [
+      [
+        {
+          "source_bbox": [
+            186,
+            381,
+            241,
+            392
+          ],
+          "detected_pixels": 175,
+          "display_width_height_ratio": 4.9681
+        },
+        {
+          "source_bbox": [
+            506,
+            381,
+            561,
+            392
+          ],
+          "detected_pixels": 173,
+          "display_width_height_ratio": 4.9681
+        }
+      ],
+      [
+        {
+          "source_bbox": [
+            220,
+            381,
+            261,
+            392
+          ],
+          "detected_pixels": 143,
+          "display_width_height_ratio": 4.9681
+        },
+        {
+          "source_bbox": [
+            460,
+            381,
+            501,
+            392
+          ],
+          "detected_pixels": 145,
+          "display_width_height_ratio": 4.9681
+        }
+      ]
+    ],
+    "scope": "Scene-specific magenta hair and two HUD clock strings, displayed at equal height. Does not certify other cameras, UI screens or full campaign."
+  },
+  "title_menu_capture": {
+    "passed": true,
+    "scene": "title",
+    "frame": 4130,
+    "cases": [
+      {
+        "case": "original-4x3",
+        "passed": true,
+        "requested_output": [
+          2560,
+          1440
+        ],
+        "drawable_output": [
+          2560,
+          1440
+        ],
+        "display_aspect": "4:3",
+        "internal_capture": [
+          640,
+          511
+        ],
+        "capture": "games/urbz-pal/validation/wide-qhd/title/original-4x3/shots/frame_04130.ppm",
+        "scope": "Raw internal capture; the compositor may constrain window size. Visual geometry/FOV comparison still requires inspection."
+      },
+      {
+        "case": "wide-16x9",
+        "passed": true,
+        "requested_output": [
+          2560,
+          1440
+        ],
+        "drawable_output": [
+          2560,
+          1440
+        ],
+        "display_aspect": "16:9",
+        "internal_capture": [
+          640,
+          511
+        ],
+        "capture": "games/urbz-pal/validation/wide-qhd/title/wide-16x9/shots/frame_04130.ppm",
+        "scope": "Raw internal capture; the compositor may constrain window size. Visual geometry/FOV comparison still requires inspection."
+      }
+    ],
+    "native_windows_tested": false
+  },
+  "normal_launcher": {
+    "passed": true,
+    "profile": "qhd",
+    "widescreen": true,
+    "actual_output": [
+      2560,
+      1440
+    ],
+    "frames": 510,
+    "new_pictures": 255,
+    "measured_refreshes": 400,
+    "mean_ms": 19.948,
+    "refreshes_per_second": 50.13,
+    "scope": "Normal launcher: parallel presentation, normal speed limit, exact readbacks, CPU/VU together. First two-player district only; audio driver dummy. Warm-up excluded.",
+    "audio_report": [
+      "[audio] the device got 10.20 s of sound in 10.12 s; the queue ran dry 0 times (about 0.00 s of silence in between), 0 samples dropped"
+    ]
+  },
+  "new_tls_graphics_cases": {
+    "linux": [
+      {
+        "pair": "2:2:fsr",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false,
+        "power_on": false
+      },
+      {
+        "pair": "2:2:wide",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false,
+        "power_on": false
+      },
+      {
+        "pair": "2:2:aspect",
+        "windows_via_wine": false,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": true,
+        "power_on": false
+      }
+    ],
+    "windows": [
+      {
+        "pair": "2:2:fsr",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false,
+        "power_on": false
+      },
+      {
+        "pair": "2:2:wide",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          0,
+          0
+        ],
+        "matching_state_checks": 7,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": false,
+        "power_on": false
+      },
+      {
+        "pair": "2:2:aspect",
+        "windows_via_wine": true,
+        "passed": true,
+        "exit_codes": [
+          1,
+          1
+        ],
+        "matching_state_checks": 0,
+        "recordings_equal": true,
+        "incompatible_settings_rejected": true,
+        "power_on": false
+      }
+    ]
+  },
+  "native_save_tls_windowed": {
+    "passed": true,
+    "windows_via_wine": true,
+    "initial_card_sha256": "b723ffcb4cd13d4597bcb60d5c69c23c1125a4ea125b343cc74cae4e85bce186",
+    "confirmation_checkpoint": true,
+    "windowed": true,
+    "authenticated_tls": true,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "frames": 1300,
+    "matching_state_checks": 43,
+    "game_page_writes": [
+      6180,
+      6180
+    ],
+    "final_card_sha256": "1a88537f8312349db5171e3432a6d35c5ba2bfb08e8046f48bb26b8ac1a0f321",
+    "recordings_equal": true,
+    "elapsed_seconds": 45.75
+  },
+  "scope": "Local PAL first district and title snapshot; final GPU captures and loopback TLS. Windows executable under Wine/Vulkan. No physical-controller, native Windows, second-PC, external Internet or full-campaign certification. Raw game-derived captures and fixtures are private and excluded from publication."
+}

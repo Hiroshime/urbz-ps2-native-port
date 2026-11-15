@@ -168,6 +168,10 @@ if(EMSCRIPTEN OR EXISTS "${PS2_WGPU_DIR}/lib/libwgpu_native.a")
     add_custom_command(OUTPUT "${PS2_BLIT_WGSL}"
         COMMAND ${CMAKE_COMMAND} -DSRC=${CMAKE_SOURCE_DIR}/runtime/src/gs/gpu/blit.wgsl -DOUT=${PS2_BLIT_WGSL} -DNAME=kBlitShader -P ${CMAKE_SOURCE_DIR}/cmake/embed.cmake
         DEPENDS runtime/src/gs/gpu/blit.wgsl cmake/embed.cmake)
+    set(PS2_FSR_WGSL "${CMAKE_BINARY_DIR}/fsr1_wgsl.cpp")
+    add_custom_command(OUTPUT "${PS2_FSR_WGSL}"
+        COMMAND ${CMAKE_COMMAND} -DSRC=${CMAKE_SOURCE_DIR}/runtime/src/gs/gpu/fsr1.wgsl -DOUT=${PS2_FSR_WGSL} -DNAME=kFsrShader -P ${CMAKE_SOURCE_DIR}/cmake/embed.cmake
+        DEPENDS runtime/src/gs/gpu/fsr1.wgsl cmake/embed.cmake)
     # The experimental hardware drawing path (hwdraw*, hwcache*, hwstat*): off unless PS2_GPU_HW=1 is set. The browser build
     # compiles the three files as empty stubs and embeds none of its shaders.
     set(PS2_HW_SOURCES runtime/src/gs/gpu/hwdraw.cpp runtime/src/gs/gpu/hwstat.cpp runtime/src/gs/gpu/hwcache.cpp)
@@ -187,7 +191,7 @@ if(EMSCRIPTEN OR EXISTS "${PS2_WGPU_DIR}/lib/libwgpu_native.a")
         list(APPEND PS2_HW_SOURCES "${PS2_HW_WGSL}" "${PS2_HW_SYNC_WGSL}" "${PS2_CACHE_WGSL}")
     endif()
     if(NOT PS2_PREBUILT)
-        target_sources(ps2runtime PRIVATE runtime/src/gs/gpu/gpu.cpp runtime/src/gs/gpu/tiles.cpp "${PS2_GS_WGSL}" "${PS2_BLIT_WGSL}" ${PS2_HW_SOURCES})
+        target_sources(ps2runtime PRIVATE runtime/src/gs/gpu/gpu.cpp runtime/src/gs/gpu/tiles.cpp "${PS2_GS_WGSL}" "${PS2_BLIT_WGSL}" "${PS2_FSR_WGSL}" ${PS2_HW_SOURCES})
     endif()
     target_compile_definitions(ps2runtime ${PS2_API} PS2_GPU)
     if(EMSCRIPTEN)

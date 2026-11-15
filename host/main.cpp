@@ -109,7 +109,7 @@ int usage() {
                  "              [--disc image.iso] [--memcard card.ps2] [--pal | --ntsc] [--trace-syscalls] [--trace-io] [--trace-threads]\n"
                  "              [--trace-iop] [--trace-iop-hle] [--frames-dir dir] [--frame-every n] [--frame-at n]...\n"
                  "              [--press frame:button[+button][:frames]]... [--press2 frame:button[:frames]]... [--pad2]\n"
-                 "              [--window] [--fullscreen]\n"
+                 "              [--window] [--fullscreen] [--window-size WIDTHxHEIGHT]\n"
                  "              [--save-state frame:file] [--load-state file|newest] [--quick-dir dir] [--widescreen] [--patches file]\n"
                  "              [--record file] [--no-record] [--replay file [--replay-continue]] [--rtc seconds] [--game-dir dir]\n"
                  "              [--net-host port | --net-join IPv4:port] [--net-delay 0..12] [--net-bind IPv4]\n"
@@ -661,6 +661,16 @@ int main(int argc, char **argv) {
         const auto result = std::from_chars(s.data(), s.data() + s.size(), out);
         return result.ec == std::errc{} && result.ptr == s.data() + s.size() && out >= lo && out <= hi;
     };
+    const auto window_size = [&number](const std::string &text) {
+        const auto x = text.find('x');
+        if (x == std::string::npos || text.find('x', x + 1) != std::string::npos) return false;
+        unsigned width = 0, height = 0;
+        if (!number(text.substr(0, x).c_str(), 320, 7680, width) ||
+            !number(text.substr(x + 1).c_str(), 240, 4320, height)) return false;
+        ps2::g_options.window_width = width;
+        ps2::g_options.window_height = height;
+        return true;
+    };
     ps2::g_options.disc_program = from_disc;
     for (int i = 0; i < argc; ++i) {
         const std::string a = argv[i];
@@ -677,6 +687,12 @@ int main(int argc, char **argv) {
         else if (a == "--misses" && i + 1 < argc) ps2::g_options.misses_path = argv[++i];
         else if (a == "--trace-syscalls") ps2::g_options.trace_syscalls = true;
         else if (a == "--widescreen") ps2::g_options.widescreen = true;
+        else if (a == "--window-size" && i + 1 < argc) {
+            if (!window_size(argv[++i])) {
+                std::fprintf(stderr, "--window-size requires WIDTHxHEIGHT, within 320x240..7680x4320\n");
+                return 2;
+            }
+        }
         else if (a == "--language" && i + 1 < argc) {
             // the language the console is set to, which multi-language discs (Urban Reign PAL: en fr de es it) show their text in
             ps2::g_options.language = language_number(argv[++i]);
@@ -749,6 +765,12 @@ int main(int argc, char **argv) {
         else if (a == "--net-sync-card") net_config.sync_card = true;
         else if (a == "--net-secure") net_config.secure = true;
         else return usage();
+    }
+    if (!ps2::g_options.window_width) {
+        if (const std::string size = ps2::os::env("PS2_WINDOW_SIZE"); !size.empty() && !window_size(size)) {
+            std::fprintf(stderr, "PS2_WINDOW_SIZE must be WIDTHxHEIGHT, within 320x240..7680x4320\n");
+            return 2;
+        }
     }
     if (net_config.sync_card && (!network || ps2::g_options.memcard_path.empty() || !load_path.empty())) {
         std::fprintf(stderr, "[net] --net-sync-card requires a network session, --memcard and a fresh boot (no --load-state)\n");

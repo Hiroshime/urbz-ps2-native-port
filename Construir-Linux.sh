@@ -20,4 +20,5 @@ if [ ! -f games/urbz-pal/entries.txt ]; then
   cp urbz-project/entries.txt games/urbz-pal/entries.txt
 fi
 bash scripts/port.sh urbz-pal "$iso" --native-only --no-explore "$@"
-ninja -C build/native-urbz-pal -j"$PS2_JOBS" ps2padtest ps2savetest
+python urbz-project/apply_game_features.py
+ninja -C build/native-urbz-pal -j"$PS2_JOBS" ps2run ps2padtest ps2savetest

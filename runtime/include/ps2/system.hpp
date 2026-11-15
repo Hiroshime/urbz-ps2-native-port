@@ -45,6 +45,7 @@ struct Options {
     bool trace_threads = false;
     bool pal = true;
     bool widescreen = false;
+    std::uint32_t window_width = 0, window_height = 0; // presentation only; not serialized or part of network simulation
     unsigned language = 0;  // --language: the console's language the game reads (1 English ... 7 Portuguese); 0 leaves PS2_LANGUAGE in charge
     bool rate_forced = false;
     std::uint64_t max_frames = 0;

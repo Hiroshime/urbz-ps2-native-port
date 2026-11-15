@@ -34,9 +34,10 @@ O foco atual é preservar a velocidade original da edição PAL, os saves e o mo
 | Save nativo | Gravação e retomada verificadas em trechos específicos |
 | Rede | Lockstep TCP com um jogador por PC; testes em loopback |
 | Internet direta | Transporte TLS implementado; acesso externo ainda não confirmado |
-| Gráficos | Perfis opcionais de resolução interna de 1× a 4× |
+| Gráficos | Perfis opcionais de 1× a 4×; FSR1 e saída Quad HD |
+| Widescreen | Câmera 16:9 e proporção do HUD corrigidas na cena testada |
 | Fluidez original | Mantida na cena medida com o launcher Linux em 2× |
-| 60 FPS, FSR, texturas HD | Sem modo suportado nesta versão |
+| 60 FPS e texturas HD | Sem modo suportado nesta versão |
 
 Não há rollback, reconexão, lista pública de salas ou servidor de lobby. A sincronização ainda não certifica o estado de todos os dispositivos do PS2 ou toda a campanha.
 
@@ -142,7 +143,7 @@ O anfitrião fornece IP e chave da partida. Os atalhos de Internet usam TLS aute
 
 ### Compatibilidade e progresso
 
-Use a mesma resolução interna e filtro 2D nos dois lados. O filtro final da imagem pode variar. O cartão compartilhado do anfitrião é a referência; o cliente recebe uma cópia antes da partida e seu cartão anterior é preservado em backup. Salve pelo menu do jogo. F1 e snapshots ficam desativados na sessão de rede.
+Use a mesma resolução interna, filtro 2D e proporção widescreen nos dois lados. O filtro final da imagem pode variar. O cartão compartilhado do anfitrião é a referência; o cliente recebe uma cópia antes da partida e seu cartão anterior é preservado em backup. Salve pelo menu do jogo. F1 e snapshots ficam desativados na sessão de rede.
 
 ## Gráficos e desempenho
 
@@ -153,10 +154,13 @@ Use a mesma resolução interna e filtro 2D nos dois lados. O filtro final da im
 | `hd` | Resolução interna 2× com filtros |
 | `alto` | Resolução interna 3× com filtros |
 | `ultra` | Resolução interna 4× com filtros |
+| `qhd` | Interno 2×, saída 2560×1440 e FSR1 EASU/RCAS |
 
 Aumentar a resolução define o tamanho interno da renderização; 2× não significa automaticamente saída 1080p. As texturas permanecem originais.
 
-O launcher Linux mediu **50,16 atualizações/s** na cena em 2×, com 155 imagens novas em 310 atualizações: aproximadamente a fluidez original PAL de 25 imagens/s. Um benchmark sequencial separado mediu ganho de 3,61× em 2× contra o executável anterior. Isso não certifica desempenho em todas as áreas ou GPUs. 4× ficou abaixo da capacidade necessária nesse benchmark.
+Para experimentar FSR1 em Quad HD e widescreen: `./Jogar-Linux.sh --graficos qhd --wide --fullscreen`. Sem `--wide`, a imagem conserva 4:3. No pacote Windows: `Jogar-Windows.cmd -Graphics qhd -Widescreen -Fullscreen`. O filtro é opcional e não gera quadros nem texturas novas. Consulte [FSR.md](urbz-project/FSR.md) e [WIDE-QHD.md](urbz-project/WIDE-QHD.md) para os controles de saída e proporção.
+
+O launcher Linux com FSR1, widescreen e saída QHD mediu **50,13 atualizações/s** na cena em 2×, com 255 imagens novas em 510 atualizações: aproximadamente a fluidez original PAL de 25 imagens/s. Um benchmark sequencial separado mediu ganho de 3,61× em 2× contra o executável anterior. Isso não certifica desempenho em todas as áreas ou GPUs. 4× ficou abaixo da capacidade necessária nesse benchmark.
 
 O alvo atual é **preservar a fluidez original**, não forçar 60 FPS. Os experimentos de desbloqueio ficaram separados dos launchers. Detalhes em [GRAFICOS.md](urbz-project/GRAFICOS.md) e [DESEMPENHO.md](urbz-project/DESEMPENHO.md). Capturas e gráficos locais mencionados nesses documentos não acompanham o checkout público.
 
@@ -164,7 +168,9 @@ O alvo atual é **preservar a fluidez original**, não forçar 60 FPS. Os experi
 
 | Evidência local | Resultado |
 |---|---|
-| Compatibilidade gráfica em rede | 14 casos aprovados, incluindo rejeições esperadas |
+| Compatibilidade gráfica em rede | 14 casos anteriores e 6 casos novos de FSR/proporção aprovados |
+| FSR e saída QHD | Imagem final 2560×1440 capturada nos dois builds; simulação preservada |
+| Widescreen | Campo de visão ampliado e geometria de personagens/HUD verificada na cena local |
 | Abertura Linux/Windows via Wine | 1.200 frames, 40 comparações de estado iguais |
 | Save pelo menu com janelas e TLS | 1.300 frames, 43 comparações iguais, cartões finais idênticos |
 | Controles virtuais SDL2 | 62 verificações aprovadas na validação anterior |
@@ -184,6 +190,7 @@ python3 scripts/prepare_urbz_github.py --check
 - [Identificação do jogo](urbz-project/game.json)
 - [Manifesto dos builds locais](urbz-project/build-manifest.json)
 - [Última validação de desempenho](urbz-project/last-performance-validation.json)
+- [Validação FSR, QHD e widescreen](urbz-project/last-fsr-wide-validation.json)
 
 O workflow de fontes verifica publicação, sintaxe Python e Bash sem a ISO. O workflow de compilação herdado permanece manual e exige as dependências adequadas; não foi executado no GitHub para este fork.
 
@@ -199,3 +206,5 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para relatar problemas e contribuir, e [
 - A investigação de patches comunitários está documentada em [FPS-INVESTIGACAO.md](urbz-project/FPS-INVESTIGACAO.md), com atribuição ao autor.
 
 O código deste repositório segue a [licença MIT](LICENSE), preservando os avisos originais. Isso não licencia os arquivos ou o código do jogo. Projeto independente, sem afiliação ou endosso de EA, Maxis, Sony ou Nintendo.
+
+O filtro FSR1 deriva do código MIT da AMD; consulte [a licença](third_party/fsr1/LICENSE) e [a revisão usada](third_party/fsr1/UPSTREAM.md).

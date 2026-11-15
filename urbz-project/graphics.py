@@ -23,7 +23,7 @@ def resolve(profile=None, config=CONFIG):
     if not isinstance(profile,str):raise ValueError('nome do perfil inválido')
     profile=profile.strip().lower()
     if profile not in data['presets']:
-        raise ValueError('perfil desconhecido; escolha padrao, original, hd, alto ou ultra')
+        raise ValueError('perfil desconhecido; escolha padrao, original, hd, alto, ultra ou qhd')
     return profile, data['presets'][profile]
 
 
@@ -48,6 +48,8 @@ def main():
             print(value['look'] or '-')
             print(value['sharp_2d'] if value['sharp_2d'] is not None else -1)
             print(value['label'])
+            print(value.get('upscaler','-'))
+            print(value.get('window_size','-'))
             return 0
         args.config.parent.mkdir(parents=True,exist_ok=True)
         fd,temp=tempfile.mkstemp(prefix='graphics-',suffix='.tmp',dir=args.config.parent)

@@ -3,6 +3,7 @@
 #include "overlay.hpp"
 #include "setup.hpp"
 #include "tiles.hpp"
+#include "../queue.hpp"
 #include "ps2/hitch.hpp"
 #include "ps2/os.hpp"
 #include "ps2/system.hpp"
@@ -40,6 +41,7 @@
 
 extern const char kGsShader[];
 extern const char kBlitShader[];
+extern const char kFsrShader[];
 
 namespace ps2::gs {
 void swizzle_tables(std::vector<std::uint32_t> &out);
@@ -2073,6 +2075,8 @@ void bench_capture() {
 }
 
 // Browsers copy writes above about 1 MiB through a slower path, so large uploads go in pieces.
+#include "fsr1.inc"
+
 void submit(WGPUTextureView present_view = nullptr) {
     const auto write_blit = [] {  // present()'s parameters, when this submit does not hand them to the job
         if (!post::g_blit_pending) return;
@@ -2107,7 +2111,7 @@ void submit(WGPUTextureView present_view = nullptr) {
         ++g_hitch_now.submits;
     }
     // the submit thread takes the writes, finish, submit and present (post above); a present only with its surface texture (present())
-    const bool async = post::enabled() && !g_live && !hwcache::g_on && !ps2::hitch::on() && !g_bench.configured && !hw::g_memlog
+    const bool async = g_present_capture.path.empty() && post::enabled() && !g_live && !hwcache::g_on && !ps2::hitch::on() && !g_bench.configured && !hw::g_memlog
         && (!present_view || post::g_present_texture);
     post::g_presented_async = false;
     const bool post_writes = async && post::mode() == 1;
@@ -2197,6 +2201,11 @@ void submit(WGPUTextureView present_view = nullptr) {
         wgpuCommandEncoderCopyBufferToBuffer(enc, g_query_resolve, 0, g_query_read, 0, 16);
     }
     if (present_view) {
+        const float out_w = static_cast<float>(g_surface_width), out_h = static_cast<float>(g_surface_height);
+        const float out_aspect = g_options.widescreen ? 16.0f / 9.0f : 4.0f / 3.0f;
+        const float view_w = std::min(out_w, out_h * out_aspect), view_h = view_w / out_aspect;
+        const bool fsr = fsr_target(static_cast<std::uint32_t>(view_w), static_cast<std::uint32_t>(view_h));
+        if (fsr) encode_easu(enc);
         wt::Scope s(wt::kRenderPass);
         WGPURenderPassColorAttachment color = WGPU_RENDER_PASS_COLOR_ATTACHMENT_INIT;
         color.view = present_view;
@@ -2211,8 +2220,8 @@ void submit(WGPUTextureView present_view = nullptr) {
         const float aspect = g_options.widescreen ? 16.0f / 9.0f : 4.0f / 3.0f;
         const float vw = std::min(w, h * aspect), vh = vw / aspect;
         wgpuRenderPassEncoderSetViewport(rp, (w - vw) * 0.5f, (h - vh) * 0.5f, vw, vh, 0.0f, 1.0f);
-        wgpuRenderPassEncoderSetPipeline(rp, g_blit);
-        wgpuRenderPassEncoderSetBindGroup(rp, 0, g_blit_group, 0, nullptr);
+        wgpuRenderPassEncoderSetPipeline(rp, fsr ? g_fsr.rcas : g_blit);
+        wgpuRenderPassEncoderSetBindGroup(rp, 0, fsr ? g_fsr.group : g_blit_group, 0, nullptr);
         wgpuRenderPassEncoderDraw(rp, 3, 1, 0, 0);
         if (g_overlay.on && g_overlay.group && g_surface_width && g_surface_height) {
             // the panel's own rectangle, cut to the window (a window made smaller than the panel shows its top left part)
@@ -2225,6 +2234,7 @@ void submit(WGPUTextureView present_view = nullptr) {
         }
         wgpuRenderPassEncoderEnd(rp);
         wgpuRenderPassEncoderRelease(rp);
+        encode_present_capture(enc);
     }
     if (async) {
         post::Job &j = post::slot();
@@ -2272,6 +2282,7 @@ void submit(WGPUTextureView present_view = nullptr) {
         wgpuCommandEncoderRelease(enc);
     }
     if (wt::g_on) --wt::g_calls[wt::kSubmit];
+    collect_present_capture();
     if (g_live) hw::live_submitted();
     hw::memlog_tick(g_instance, g_queue, frame_count());  // PS2_GPU_HW_MEMLOG=<n>
     if (measure) {
@@ -4086,6 +4097,7 @@ void configure_surface() {
     config.device = g_device;
     config.format = g_surface_format;
     config.usage = WGPUTextureUsage_RenderAttachment;
+    if (g_present_capture.supported) config.usage |= WGPUTextureUsage_CopySrc;
     config.width = std::max(g_surface_width, 1u);
     config.height = std::max(g_surface_height, 1u);
     config.presentMode = g_present_mode;
@@ -4153,6 +4165,8 @@ bool attach_surface(const SurfaceTarget &target) {
         g_surface = nullptr;
         return false;
     }
+    g_present_capture.supported = !g_present_capture.path.empty() && (caps.usages & WGPUTextureUsage_CopySrc);
+    if (!g_present_capture.path.empty() && !g_present_capture.supported) std::fprintf(stderr, "[video] surface does not support presented-image capture\n");
     g_surface_format = caps.formats[0];
     for (std::size_t i = 0; i < caps.formatCount; ++i)
         if (caps.formats[i] == WGPUTextureFormat_BGRA8Unorm || caps.formats[i] == WGPUTextureFormat_RGBA8Unorm) {
@@ -4233,6 +4247,7 @@ bool attach_surface(const SurfaceTarget &target) {
     bd.entryCount = 2;
     bd.entries = be;
     g_blit_group = wgpuDeviceCreateBindGroup(g_device, &bd);
+    init_fsr(layout);
     wgpuBindGroupLayoutRelease(layout);
     return g_blit != nullptr;
 }
@@ -4379,6 +4394,7 @@ bool present(const DisplaySource &src) {
     const float aspect = g_options.widescreen ? 16.0f / 9.0f : 4.0f / 3.0f;
     const float vw = std::min(sw, sh * aspect), vh = vw / aspect;
     const std::uint32_t blit[8] = {src.width * g_scale, src.height * g_scale, current, previous, blend ? 1u : 0u, static_cast<std::uint32_t>(vw), static_cast<std::uint32_t>(vh), ps2::video_options()};
+    g_fsr.upscale = src.width * g_scale <= static_cast<std::uint32_t>(vw) && src.height * g_scale <= static_cast<std::uint32_t>(vh);
     post::drain();  // the last picture is presented before this one's acquire
     std::memcpy(post::g_blit, blit, sizeof blit);  // written by the next submit (its job with the submit thread), before the frame's other writes
     post::g_blit_pending = true;

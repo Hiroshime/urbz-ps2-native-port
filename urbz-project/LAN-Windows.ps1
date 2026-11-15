@@ -2,7 +2,10 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('Host','Join')][string]$Role,
     [string]$Address,
     [switch]$Internet,
-    [ValidateSet('padrao','original','hd','alto','ultra')][string]$Graphics,
+    [ValidateSet('padrao','original','hd','alto','ultra','qhd')][string]$Graphics,
+    [ValidateSet('off','fsr1')][string]$Upscaler,
+    [switch]$Widescreen,
+    [string]$WindowSize,
     [ValidateRange(1,65535)][int]$Port = 27888,
     [ValidateRange(0,12)][int]$Delay = 3,
     [ValidateRange(0,2147483647)][int]$Frames = 0
@@ -11,6 +14,8 @@ $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 . (Join-Path $PSScriptRoot 'Graphics-Windows.ps1')
 Set-UrbzGraphics -Profile $Graphics
+if ($Upscaler) { $env:PS2_UPSCALER = $Upscaler }
+if ($WindowSize) { $env:PS2_WINDOW_SIZE = $WindowSize }
 if ($Internet) {
     if (-not $PSBoundParameters.ContainsKey('Delay')) { $Delay = 6 }
     if (-not $env:URBZ_NET_KEY) {
@@ -65,6 +70,7 @@ if ($Role -eq 'Host') {
 }
 else { $gameArgs += @('--net-join',"${Address}:$Port") }
 if ($Internet) { $gameArgs += '--net-secure' }
+if ($Widescreen) { $gameArgs += '--widescreen' }
 if ($Frames -gt 0) { $gameArgs += @('--frames',"$Frames") }
 $process = Start-Process -FilePath (Join-Path $PSScriptRoot 'Urbz.exe') -WorkingDirectory $PSScriptRoot -ArgumentList $gameArgs -Wait -PassThru
 exit $process.ExitCode

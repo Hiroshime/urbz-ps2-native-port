@@ -1,4 +1,4 @@
-param([ValidateSet('padrao','original','hd','alto','ultra')][string]$Profile)
+param([ValidateSet('padrao','original','hd','alto','ultra','qhd')][string]$Profile)
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 $table = Get-Content -LiteralPath 'graphics-presets.json' -Raw -Encoding UTF8 | ConvertFrom-Json

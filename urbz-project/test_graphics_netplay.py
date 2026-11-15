@@ -27,9 +27,9 @@ def main():
             parts=pair.split(':')
             a,b=map(int,parts[:2])
             variant=parts[2] if len(parts)==3 else ''
-            if len(parts) not in (2,3) or variant not in ('','filter','look'):raise ValueError('invalid test case')
+            if len(parts) not in (2,3) or variant not in ('','filter','look','fsr','wide','aspect'):raise ValueError('invalid test case')
             if a not in range(1,5) or b not in range(1,5):raise ValueError('scales must be 1..4')
-            incompatible=a!=b or variant=='filter'
+            incompatible=a!=b or variant in ('filter','aspect')
             name=('boot-' if args.boot else '')+f'{a}x-{b}x'+('-'+variant if variant else '')+('-wine' if args.windows else '')
             directory=OUT/name;directory.mkdir(exist_ok=True)
             port=str(free_port())
@@ -54,6 +54,10 @@ def main():
                                URBZ_NET_KEY='0123456789abcdef0123456789abcdef',WINEDEBUG='-all',WINEDLLOVERRIDES='mscoree,mshtml=')
                     if index==1 and variant=='filter':env['PS2_SHARP_2D']='2'
                     if index==1 and variant=='look':env['PS2_LOOK']='soft_edges'
+                    if variant=='fsr':
+                        env['PS2_UPSCALER']='fsr1' if index==0 else 'off'
+                        command += ['--window-size','2560x1440' if index==0 else '1280x960']
+                    if variant=='wide' or (variant=='aspect' and index==1):command += ['--widescreen']
                     if args.windows:env['WINEPREFIX']=os.environ.get('WINEPREFIX',str(ROOT/'tools/wine-prefix-net'))
                     command += ['--record',str(directory/(side+'.inputs'))]
                     stream=(directory/(side+'.log')).open('w');files.append(stream)
@@ -74,6 +78,9 @@ def main():
                 passed &= all('connected as player' not in t for t in logs)
             else:
                 passed=codes==[0,0] and all(f'complete: {end-first} frames, {checks} state checks matched' in t for t in logs) and records[0]==records[1]
+            if variant=='fsr' and not incompatible:
+                passed &= 'FSR1 EASU + RCAS enabled' in logs[0] and 'FSR1 presentation target' in logs[0]
+                passed &= 'FSR1 EASU + RCAS enabled' not in logs[1]
             results.append({'pair':pair,'windows_via_wine':args.windows,'passed':passed,'exit_codes':codes,'matching_state_checks':checks if passed and not incompatible else 0,'recordings_equal':records[0]==records[1], 'incompatible_settings_rejected':bool(passed and incompatible),'power_on':args.boot})
             print(('PASS ' if passed else 'FAIL ')+name,flush=True)
             if not passed:raise RuntimeError('graphics synchronization failed: '+name)

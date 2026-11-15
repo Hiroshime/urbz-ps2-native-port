@@ -5,20 +5,20 @@
   "builds": {
     "linux": {
       "path": "build/native-urbz-pal/ps2run",
-      "sha256": "0f8143562e630da48e4619898f1fab95d264304422b0633ffe9c22a75fb76b75",
-      "bytes": 58488080,
+      "sha256": "507c579341c8e3036ee8467aacfff6bb6e87727963c174fd43ffcae3ba77b020",
+      "bytes": 58501552,
       "flags": "-ffp-contract=off -mavx2",
-      "netplay_source_id": "d5337ed5cc61f7a002dd0e7f491529ab56006e3adf94b7b843f47a2e82432a28"
+      "netplay_source_id": "2a1182686d80b68754681f2a9df4456b87393d0ff7d65f5d7856b803c115edab"
     },
     "windows": {
       "path": "build/wine-urbz-pal/ps2run.exe",
-      "sha256": "fd6ded221abc36a15b2650f06f87a26d68824ce4ce5ef121db2412043eecb328",
-      "bytes": 62693888,
+      "sha256": "5d3898efa9504c7a82a56221a6fea18426aa7a9c372828d311311895367474f5",
+      "bytes": 62707200,
       "flags": "-mavx2 -ffp-contract=off",
-      "netplay_source_id": "d5337ed5cc61f7a002dd0e7f491529ab56006e3adf94b7b843f47a2e82432a28"
+      "netplay_source_id": "2a1182686d80b68754681f2a9df4456b87393d0ff7d65f5d7856b803c115edab"
     }
   },
-  "utc": "2026-11-14T21:01:38.321649+00:00",
+  "utc": "2026-11-15T13:29:19.200729+00:00",
   "netplay_protocol": 3,
   "secure_transport": "TLS 1.2 DHE-PSK AES-128-GCM",
   "openssl_windows_static": "3.5.9",

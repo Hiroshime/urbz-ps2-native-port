@@ -33,12 +33,22 @@
   "openssl_source_sha256": "603f5602e2eef00d77fbd429d34dcd5822bb301757a1bc9cdb24c670f1eb859a",
   "graphics_presets": "graphics-presets.json",
   "graphics_default_profile": "padrao",
-  "graphics_profiles": ["padrao", "original", "hd", "alto", "ultra"],
-  "netplay_graphics_compatibility": "Internal scale and 2D filter must match; final presentation look may differ. Enforced before shared-card transfer.",
+  "graphics_profiles": [
+    "padrao",
+    "original",
+    "hd",
+    "alto",
+    "ultra",
+    "qhd"
+  ],
+  "netplay_graphics_compatibility": "Internal scale, 2D filtering and widescreen must match; FSR1, presentation look and output size may differ. Enforced before shared-card transfer.",
   "graphics_measurement_scope": "Original graphics benchmark is historical. Updated one-thread first-district benchmark exceeds full PAL capacity at 1x/2x, below at 4x. See DESEMPENHO.md.",
   "vu_aot_programs": 92,
   "offline_rendering": "Parallel window renderer, CPU/VU on one simulation thread, current framebuffer readbacks; original PAL game timing preserved.",
   "netplay_rendering": "Parallel window renderer with exact current framebuffer readbacks and CPU/VU together; headless remains sequential.",
   "supported_60fps_mode": false,
-  "fps60_investigation": "Experimental clock-corrected 60Hz candidate reached about 52 distinct images/s at 1x with matching repeated checkpoints; physics and campaign unvalidated. No supported 60FPS preset shipped."
+  "fps60_investigation": "Experimental clock-corrected 60Hz candidate reached about 52 distinct images/s at 1x with matching repeated checkpoints; physics and campaign unvalidated. No supported 60FPS preset shipped.",
+  "spatial_upscaler": "Optional FSR1 EASU + RCAS, WGSL FP32 adaptation of AMD MIT reference; final presentation only, no temporal reconstruction or frame generation.",
+  "output_resolution": "Optional 2560x1440 request; compositor/desktop controls actual drawable size.",
+  "widescreen": "Optional 16:9 camera projection plus centered Apt UI affine transform; two-player district geometry/HUD measured. Further cameras, menus and campaign remain experimental."
 }
